@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Dream Form</h1>
+    <form action="#" th:action="@{/dream}" th:object="${dream}" method="post">
+    	<p>Date: <input type="text" th:field="*{date}" /></p>
+        <p>Dream: <input type="text" th:field="*{content}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset"/></p>
+    </form>
+    <h1>Result</h1>
+    <p th:text="'date: ' + ${dream.date}"/>
+    <p th:text="'answer: ' + ${interpretation.interpretation}"/>
+</body>
+</html>
