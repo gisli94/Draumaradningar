@@ -1,4 +1,4 @@
-package hello;
+package DreamDiary;
 
 public class Interpretation {
 
