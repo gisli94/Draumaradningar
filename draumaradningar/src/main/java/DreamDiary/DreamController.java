@@ -11,7 +11,7 @@ public class DreamController {
 
     @GetMapping("/dream")
     public String dreamForm(Model model) {
-        model.addAttribute("dream", new Dream("",""));
+        model.addAttribute("dream", new Dream(1,1,""));
         model.addAttribute("interpretation", new Interpretation ());
         return "dream";
     }
