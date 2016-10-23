@@ -6,7 +6,7 @@ public class Dream {
     private int id;
     private Date dreamDate;
     //private Interpretation interpretation;
-    private String interpretation;
+    private String interpretation;  // temporary
     private int userId;
 
     public Dream(int dreamId, int userId, String content) {
@@ -16,9 +16,6 @@ public class Dream {
         this.dreamDate = new java.util.Date();
     }
 
-    public void test(){
-      System.out.print("Draumur virkar");
-    }
 
     // Notkun: inputDream.interpret()
     // Fyrir: inputDream er hlutur af tagi Dream.

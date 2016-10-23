@@ -1,6 +1,6 @@
+//package DreamDiary;
 import java.util.*;
 
-//package DreamDiary;
 
 public class User {
 
