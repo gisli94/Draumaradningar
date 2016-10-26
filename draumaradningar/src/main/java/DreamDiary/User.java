@@ -28,10 +28,14 @@ public class User {
     List<Dream> updatedDreamList = oldDreamList.add(nyr_draumur);
     return updatedDreamList;
   }*/
+
+  // þarf að laga svo það noti nýja Dream constructorinn.
+  /*
   protected Dream logDream(int dreamId, List<Dream> oldDreamList, String dream_text) {
     Dream nyr_draumur = new Dream(id, dreamId, dream_text);
     return nyr_draumur;
   }
+  */
 
 
   // Notkun:

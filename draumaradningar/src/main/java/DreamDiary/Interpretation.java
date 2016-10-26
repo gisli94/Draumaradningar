@@ -2,10 +2,14 @@ package DreamDiary;
 
 public class Interpretation {
 
-	private Dream dream;
-	private String interpretation;
+	private String content;
 
-	public Interpretation(){}
+	public Interpretation(){
+		this.content = "";
+	}
+	public Interpretation(String content){
+		this.content = content;
+	}
 
 	/*
 	public Interpretation(Dream dream) {
@@ -14,6 +18,15 @@ public class Interpretation {
 	}
 	*/
 
+	public String getContent(){
+		return content;
+	}
+
+	public void setContent(String new_content){
+		this.content = new_content;
+	}
+
+	/*
 	public Dream getDream() {
 		return dream;
 	}
@@ -30,10 +43,11 @@ public class Interpretation {
 	public void setInterpretation(String interpretation) {
 		this.interpretation = interpretation;
 	}
+	*/
 
-	private String interpret(Dream dream) {
-		String inter = (new StringBuilder(dream.getContent()).reverse().toString());
-		return inter;
+	public static void interpret(Dream dream) {
+		String intr = (new StringBuilder(dream.getContent()).reverse().toString());
+		dream.setInterpretation(new Interpretation(intr));
 	}
 
 }

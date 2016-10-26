@@ -11,7 +11,7 @@ public class DreamController {
 
     @GetMapping("/dream")
     public String dreamForm(Model model) {
-        model.addAttribute("dream", new Dream(1,1,""));
+        model.addAttribute("dream", new Dream("", 1, "", 1));
         model.addAttribute("interpretation", new Interpretation ());
         return "dream";
     }
@@ -20,7 +20,7 @@ public class DreamController {
     public String dreamSubmit(@ModelAttribute Dream dream, @ModelAttribute Interpretation interpretation) {
     	//dream.setDate(dream.getDate());
     	//dream.setAnswer(new StringBuilder(dream.getContent()).reverse().toString());
-    	interpretation.setDream(dream);
+    	//interpretation.setDream(dream);
         return "dream";
     }
 

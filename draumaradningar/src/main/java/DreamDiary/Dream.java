@@ -1,28 +1,35 @@
 package DreamDiary;
+
 import java.util.*;
+import java.time.LocalDate;
+
 public class Dream {
 
+    private String name; //vantar getset
+    private int userId;
     private String content;
     private int id;
-    private Date dreamDate;
-    //private Interpretation interpretation;
-    private String interpretation;  // temporary
-    private int userId;
+    private LocalDate date;
+    private Interpretation interpretation;
 
-    public Dream(int dreamId, int userId, String content) {
-        this.id = dreamId;
+    public Dream(String name, int userId, String content, int id) {
+        this.name = name;
         this.userId = userId;
         this.content = content;
-        this.dreamDate = new java.util.Date();
+        this.id = id;
+        this.date = LocalDate.now();
+        this.interpretation = new Interpretation();
     }
 
 
     // Notkun: inputDream.interpret()
     // Fyrir: inputDream er hlutur af tagi Dream.
     // Eftir: inputDream hefur fengid Interpretation attribute
+    /*
     protected void interpret() {
       this.interpretation = (new StringBuilder(this.content).reverse().toString());
     }
+    */
 
     // Notkun: editDream(old_dream)
     // Fyrir: old_dream er hlutur af tagi Dream
@@ -32,6 +39,22 @@ public class Dream {
 
 
     // Only getters and setters bellow this point
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String new_name){
+        this.name = new_name;
+    }
+
+    public int getUserId(){
+      return userId;
+    }
+
+    public void setUserId(int new_userId){
+      this.userId = new_userId;
+    }
+
     public String getContent(){
       return content;
     }
@@ -48,15 +71,19 @@ public class Dream {
       this.id = new_dreamId;
     }
 
-    public int getUserId(){
-      return userId;
+    public LocalDate getDate() {
+      return date;
     }
 
-    public void setUserId(int new_userId){
-      this.userId = new_userId;
+    public void setDate(LocalDate new_date){
+        this.date = new_date;
     }
 
-    public Date getDate() {
-      return dreamDate;
+    public Interpretation getInterpretation(){
+        return interpretation;
+    }
+
+    public void setInterpretation(Interpretation new_interpretation){
+        this.interpretation = new_interpretation;
     }
 }

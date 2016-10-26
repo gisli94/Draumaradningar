@@ -45,58 +45,62 @@ public class DatabaseController{
 		return complete;
 	}
 
-	public boolean addDream(String id, String dream) {
-		String sql = "INSERT INTO DREAMS (id, content, date, interp, userid) VALUES ('1', 'Mig dreymdi ís.', '123', 'Þú munt deyja á morgun.', '999');";
+	public boolean addDream(Dream dream) {
+        // name, userid, content, id, date, interpretation
+        //String sql = "INSERT INTO DREAMS (name, userid, content, id, date, interpretation) VALUES ('1', 'Mig dreymdi ís.', '123', 'Þú munt deyja á morgun.', '999');";
+		String sql = "INSERT INTO DREAMS (id, userid, date, name, content, interpretation) VALUES ('" + dream.getId() + "', '" + dream.getUserId() + "', '" + dream.getDate() + "', '" + dream.getName() + "', '" + dream.getContent() + "', '" + dream.getInterpretation().getContent() + "');";
 		return update(sql);
 	}
+
+    //public boolean addUser(String )
         
-        public String testQuery() {
-            Connection connection = null;
-            Statement statement = null;
-            String str = "";
-            
-            try {
-                Class.forName("org.postgresql.Driver");
-                connection = DriverManager.getConnection("jdbc:postgresql://horton.elephantsql.com:5432/afkfpofr",
-				"afkfpofr", "C2UETIervjxGCirloUj6XhQMC3T_z4XS");
-                statement = connection.createStatement();
-                String sql = "SELECT * FROM DREAMS";
+    public String testQuery() {
+        Connection connection = null;
+        Statement statement = null;
+        String str = "";
+        
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection("jdbc:postgresql://horton.elephantsql.com:5432/afkfpofr",
+			"afkfpofr", "C2UETIervjxGCirloUj6XhQMC3T_z4XS");
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM DREAMS";
                 
-                ResultSet rs = statement.executeQuery(sql);
+            ResultSet rs = statement.executeQuery(sql);
                 
-                while (rs.next()) {
-                    int id = rs.getInt("id");
-                    String content = rs.getString("content");
-                    int date = rs.getInt("date");
-                    String interp = rs.getString("interp");
-                    int userid = rs.getInt("userid");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String content = rs.getString("content");
+                int date = rs.getInt("date");
+                String interp = rs.getString("interp");
+                int userid = rs.getInt("userid");
                     
-                    str = "" + id
-                            + " " + content
-                            + " " + date
-                            + " " + interp
-                            + " " + userid;   
-                }
-                rs.close();
-                statement.close();
-                //connection.commit();
-                connection.close();
+                str = "" + id
+                        + " " + content
+                        + " " + date
+                        + " " + interp
+                        + " " + userid;   
             }
-            catch (Exception e) {
-                System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                System.exit(0);
-            }  
-            return str;
+            rs.close();
+            statement.close();
+            //connection.commit();
+            connection.close();
         }
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }  
+        return str;
+    }
         
-        public void createTable() {
-            String sql = "CREATE TABLE DREAMS(id int, content varchar(500), date int, interp varchar(200), userid int);";
-            update(sql);
-        }
+    public void createTable() {
+        String sql = "CREATE TABLE DREAMS(id int, content varchar(500), date int, interp varchar(200), userid int);";
+        update(sql);
+    }
         
-        public void dropTable() {
-            String sql = "DROP TABLE DREAMS";
-            update(sql);
-        }
+    public void dropTable() {
+        String sql = "DROP TABLE DREAMS";
+        update(sql);
+    }
 
 }
