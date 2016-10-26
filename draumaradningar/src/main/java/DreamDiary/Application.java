@@ -8,6 +8,9 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+        DatabaseController db = new DatabaseController();
+        String str = db.testQuery();
+        System.out.println(str);
     }
 
 }

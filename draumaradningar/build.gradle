@@ -27,4 +27,5 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     testCompile("junit:junit")
+    compile 'postgresql:postgresql:9.1-901-1.jdbc4'
 }
