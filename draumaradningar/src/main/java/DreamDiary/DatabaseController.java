@@ -10,6 +10,9 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
 /**
  *
  * @author Gisli
@@ -53,11 +56,13 @@ public class DatabaseController{
 	}
 
     //public boolean addUser(String )
-        
-    public String testQuery() {
+    
+    // brotið    
+    public Dream[] testQuery() {
         Connection connection = null;
         Statement statement = null;
         String str = "";
+        ArrayList<Dream> list = new ArrayList<Dream>();
         
         try {
             Class.forName("org.postgresql.Driver");
@@ -70,17 +75,17 @@ public class DatabaseController{
                 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String content = rs.getString("content");
-                int date = rs.getInt("date");
-                String interp = rs.getString("interp");
                 int userid = rs.getInt("userid");
-                    
-                str = "" + id
-                        + " " + content
-                        + " " + date
-                        + " " + interp
-                        + " " + userid;   
+                //Date date = rs.getDate("date");
+                LocalDate date = rs.getDate("date").toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                String name = rs.getString("name");
+                String content = rs.getString("content");
+                String interpretation = rs.getString("interpretation");
+                //Dream dream = new Dream(id, userid, date, name, content, interpretation);
+                System.out.println(date);
+                list.add(new Dream(id, userid, date, name, content, new Interpretation(interpretation)));
             }
+            //Dream dream = new Dream(id, userid, date, name, content, interpretation);
             rs.close();
             statement.close();
             //connection.commit();
@@ -90,7 +95,8 @@ public class DatabaseController{
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }  
-        return str;
+
+        return list.toArray(new Dream[list.size()]);
     }
         
     public void createTable() {

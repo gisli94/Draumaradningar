@@ -21,6 +21,17 @@ public class Dream {
         this.interpretation = new Interpretation();
     }
 
+    public Dream(int id, int userId, LocalDate date, String name, String content, Interpretation interpretation){
+        this.name = name;
+        this.userId = userId;
+        this.content = content;
+        this.id = id;
+        this.date = date;
+        this.interpretation = interpretation;
+    }
+
+    public Dream(){}
+
 
     // Notkun: inputDream.interpret()
     // Fyrir: inputDream er hlutur af tagi Dream.
@@ -85,5 +96,9 @@ public class Dream {
 
     public void setInterpretation(Interpretation new_interpretation){
         this.interpretation = new_interpretation;
+    }
+
+    public String toString(){
+        return ("" + name + " " + userId + " " + content + " " + id + " " + date + " " + interpretation.getContent());
     }
 }
