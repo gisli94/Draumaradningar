@@ -45,8 +45,13 @@ public class Interpretation {
 	}
 	*/
 
+	public String toString(){
+		return "" + content;
+	}
+
 	public static void interpret(Dream dream) {
-		String intr = (new StringBuilder(dream.getContent()).reverse().toString());
+		// String intr = Henrýfall(dream);
+		String intr = (new StringBuilder(dream.getContent()).reverse().toString()); //eyða þegar hitt er tilbúið
 		dream.setInterpretation(new Interpretation(intr));
 	}
 

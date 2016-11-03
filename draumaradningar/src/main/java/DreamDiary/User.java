@@ -10,7 +10,7 @@ public class User {
   protected List<Dream> dreamList = new ArrayList<Dream>();
 
   // Constructor
-  public User(String userName, int userId, String userPassword) {
+  public User(int userId, String userName, String userPassword) {
     this.name = userName;
     this.id = userId;
     this.password = userPassword;
@@ -74,6 +74,10 @@ public class User {
 
   public void setPassword(String new_password) {
     this.password = new_password;
+  }
+
+  public String toString(){
+    return "" + id + " " + name + " " + password;
   }
 
 }
