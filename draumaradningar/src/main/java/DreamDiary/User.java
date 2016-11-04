@@ -1,14 +1,22 @@
 package DreamDiary;
 import java.util.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 public class User {
 
+  @NotNull
+  @Size(min=2, max=30)
   private String name;
   private int id;
+    @NotNull
+  @Size(min=8, max=30)
   private String password;
+  
   protected List<Dream> dreamList = new ArrayList<Dream>();
 
+  public User(){}
   // Constructor
   public User(int userId, String userName, String userPassword) {
     this.name = userName;
