@@ -17,7 +17,7 @@ public class User {
   private int id;
   protected List<Dream> dreamList = new ArrayList<Dream>();
 
-  // Constructor
+  // Constructors
   //Needed for init
   public User(){}
   

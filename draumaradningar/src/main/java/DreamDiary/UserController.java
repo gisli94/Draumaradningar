@@ -1,12 +1,10 @@
 package DreamDiary;
 
-
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -14,6 +12,7 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
+import javax.validation.Valid;
 
 @Controller
 public class UserController extends WebMvcConfigurerAdapter {
@@ -32,6 +31,12 @@ public class UserController extends WebMvcConfigurerAdapter {
     }
 	*/
 	
+	//For displaying the login page
+    @GetMapping("/login")
+    public String userInfoForm(User userinfo) {
+        return "login";
+    }
+	
 	//For receiveing data from loginform POSTed to /login
 	@PostMapping("/login")
     public String userInfoSubmit(@Valid User userinfo, BindingResult bindingResult, Model model) {
@@ -45,6 +50,7 @@ public class UserController extends WebMvcConfigurerAdapter {
         return "result";	
     }
 	/*
+	
 	//For when connecting to facebook
 	@GetMapping("/login")
     public String helloFacebook(Model model) {
@@ -58,23 +64,25 @@ public class UserController extends WebMvcConfigurerAdapter {
         return "result";
     }
 	*/
-	//For displaying the form
-    @GetMapping("/login")
-    public String userInfoForm(User userinfo) {
-        return "login";
-    }
+	
+
 	
 	/*
+	//For creating a new user
 	@PostMapping("/newUser")
 	public String RequestNewUser(@Valid User userinfo, BindingResult bindingResult, Model model){
-		
-		
+		if (bindingResult.hasErrors()) {
+            return "login";
+        }
+		//give user an id and save credentials.
+		model.addAttribute("user", userinfo)
 		return "welcome";
 	}
 	
-	@GetMapping("newUser")
+	//for displaying the form for registering a new user
+	@GetMapping("/newUser")
 	public String newUserForm(User userinfo){
-		return "welcome"
+		return "newUser"
 	}
 */
 }
