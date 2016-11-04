@@ -9,15 +9,18 @@ public class User {
   @NotNull
   @Size(min=2, max=30)
   private String name;
-  private int id;
-    @NotNull
+    
+  @NotNull
   @Size(min=8, max=30)
   private String password;
   
+  private int id;
   protected List<Dream> dreamList = new ArrayList<Dream>();
 
-  public User(){}
   // Constructor
+  //Needed for init
+  public User(){}
+  
   public User(int userId, String userName, String userPassword) {
     this.name = userName;
     this.id = userId;
