@@ -26,6 +26,7 @@ targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile("org.springframework.social:spring-social-facebook")
     testCompile("junit:junit")
     compile 'postgresql:postgresql:9.1-901-1.jdbc4'
 }
