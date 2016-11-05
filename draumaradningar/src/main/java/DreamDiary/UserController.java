@@ -91,7 +91,7 @@ public class UserController extends WebMvcConfigurerAdapter {
         }
 		//DatabaseController.addUser(userinfo);
 		model.addAttribute("user", userinfo);
-		return "dream";
+		return "result";
 	}
 	
 	//for displaying the form for registering a new user
