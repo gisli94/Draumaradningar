@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.validation.Errors;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
@@ -21,14 +22,19 @@ import org.springframework.social.facebook.api.Post;
 import javax.validation.Valid;
 
 @Controller
-public class UserController extends WebMvcConfigurerAdapter {
+public class UserController{
 	
 
-	
+@Controller
+public class LoginController extends WebMvcConfigurerAdapter {
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+		dataBinder.setDisallowedFields("passwordConfirm");
+	}
 	private Facebook facebook;
     private ConnectionRepository connectionRepository;
 
-    public UserController(Facebook facebook, ConnectionRepository connectionRepository) {
+    public LoginController(Facebook facebook, ConnectionRepository connectionRepository) {
         this.facebook = facebook;
         this.connectionRepository = connectionRepository;
 	}
@@ -41,15 +47,18 @@ public class UserController extends WebMvcConfigurerAdapter {
 	
 	//For displaying the login page
     @GetMapping("/login")
-    public String userInfoForm(User userinfo) {
+    public String userInfoForm(Model model) {
+		model.addAttribute("user", new User());
         return "login";
     }
 	
 	//For receiveing data from loginform POSTed to /login
 	@PostMapping("/login")
-    public String userInfoSubmit(@Valid User userinfo, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            return "login";
+    public String userInfoSubmit(@Valid User userinfo, BindingResult bindingResult, Model model, Errors errors) {
+		userinfo.setPasswordConfirm(userinfo.getPassword());
+		if (bindingResult.hasErrors()) {
+            System.out.println(errors.toString());
+			return "login";
         }
 
 		//validate user here?
@@ -72,23 +81,21 @@ public class UserController extends WebMvcConfigurerAdapter {
         return "result";
     }
 	*/
-	
-	//For validating password from signup form
-	@Autowired
-	@Qualifier("passwordValidator")
-	private Validator validator;
-	
-	@InitBinder
-	private void initBinder(WebDataBinder binder) {
-		binder.setValidator(validator);
-	}
+}
+
+@Controller
+public class newUserController{
 	
 	//For creating a new user
 	@PostMapping("/newUser")
-	public String RequestNewUser(@Valid User userinfo, BindingResult bindingResult, Model model){
+	public String RequestNewUser(@Valid User userinfo, BindingResult bindingResult, Model model, Errors errors){
 		if (bindingResult.hasErrors()) {
             return "newUser";
         }
+		else if (!userinfo.getPassword().equals(userinfo.getPasswordConfirm())){
+			errors.rejectValue("passwordConfirm", "","Your passwords don't match");
+			return "newUser";
+		}
 		//DatabaseController.addUser(userinfo);
 		model.addAttribute("user", userinfo);
 		return "result";
@@ -96,8 +103,10 @@ public class UserController extends WebMvcConfigurerAdapter {
 	
 	//for displaying the form for registering a new user
 	@GetMapping("/newUser")
-	public String newUserForm(User userinfo){
+	public String newUserForm(Model model){
+		model.addAttribute("user", new User());
 		return "newUser";
 	}
 
+}
 }

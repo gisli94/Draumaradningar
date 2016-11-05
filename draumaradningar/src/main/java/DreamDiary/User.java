@@ -20,7 +20,7 @@ public class User {
   @Size(min=8, max=30)
   private String password;
   
-  @NotNull
+  //@NotNull
   @Size(min=8, max=30)
   private String passwordConfirm;
   

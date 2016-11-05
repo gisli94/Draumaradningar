@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h2>Login Form</h2>
-    <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+    <form th:action="@{/login}" th:object="${user}" method="post">
 		<table>
 			<tr>
 				<td>Name:</td>
@@ -40,7 +40,7 @@
     <form th:action="@{/dream}" th:object="${dream}" method="post">
 	<table>
 		<tr>	
-			<td>Date: <input type="text" th:field="*{date}" /></td>
+			<td>Date: <input type="date" th:field="*{date}" /></td>
 	</tr>
 		<tr>
 			<td>Dream: </td>
