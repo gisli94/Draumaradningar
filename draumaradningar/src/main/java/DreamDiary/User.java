@@ -2,8 +2,14 @@ package DreamDiary;
 import java.util.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-
+@Entity
+//@Table(name = "user")
 public class User {
 
   @NotNull
@@ -14,10 +20,14 @@ public class User {
   @Size(min=8, max=30)
   private String password;
   
+  @NotNull
+  @Size(min=8, max=30)
+  private String passwordConfirm;
+  
   private int id;
   protected List<Dream> dreamList = new ArrayList<Dream>();
 
-  // Constructors
+  //Constructors
   //Needed for init
   public User(){}
   
@@ -71,6 +81,8 @@ public class User {
     this.name = new_name;
   }
 
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
   public int getId() {
     return id;
   }
@@ -86,7 +98,14 @@ public class User {
   public void setPassword(String new_password) {
     this.password = new_password;
   }
+  
+  public String getPasswordConfirm() {
+    return passwordConfirm;
+  }
 
+  public void setPasswordConfirm(String new_password) {
+    this.passwordConfirm = new_password;
+  }
   public String toString(){
     return "" + id + " " + name + " " + password;
   }

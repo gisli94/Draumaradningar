@@ -1,11 +1,17 @@
 package DreamDiary;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.social.connect.ConnectionRepository;
@@ -16,6 +22,8 @@ import javax.validation.Valid;
 
 @Controller
 public class UserController extends WebMvcConfigurerAdapter {
+	
+
 	
 	private Facebook facebook;
     private ConnectionRepository connectionRepository;
@@ -65,24 +73,31 @@ public class UserController extends WebMvcConfigurerAdapter {
     }
 	*/
 	
-
+	//For validating password from signup form
+	@Autowired
+	@Qualifier("passwordValidator")
+	private Validator validator;
 	
-	/*
+	@InitBinder
+	private void initBinder(WebDataBinder binder) {
+		binder.setValidator(validator);
+	}
+	
 	//For creating a new user
 	@PostMapping("/newUser")
 	public String RequestNewUser(@Valid User userinfo, BindingResult bindingResult, Model model){
 		if (bindingResult.hasErrors()) {
-            return "login";
+            return "newUser";
         }
-		//give user an id and save credentials.
-		model.addAttribute("user", userinfo)
-		return "welcome";
+		//DatabaseController.addUser(userinfo);
+		model.addAttribute("user", userinfo);
+		return "result";
 	}
 	
 	//for displaying the form for registering a new user
 	@GetMapping("/newUser")
 	public String newUserForm(User userinfo){
-		return "newUser"
+		return "newUser";
 	}
-*/
+
 }
