@@ -3,6 +3,8 @@ package DreamDiary;
 import java.util.*;
 import java.time.LocalDate;
 
+
+
 public class Dream {
 
     private String name; //vantar getset
@@ -12,6 +14,8 @@ public class Dream {
     private LocalDate date;
     private Interpretation interpretation;
 
+	public Dream(){}
+	
     public Dream(String name, int userId, String content, int id) {
         this.name = name;
         this.userId = userId;
@@ -30,7 +34,7 @@ public class Dream {
         this.interpretation = interpretation;
     }
 
-    public Dream(){}
+    
 
 
     // Notkun: inputDream.interpret()

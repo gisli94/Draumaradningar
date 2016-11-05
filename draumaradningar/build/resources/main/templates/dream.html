@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Welcome <p th:text="${user.name}"/></h1>
+	<h1>Welcome <p th:if="${user.name}" th:text="${user.name}"/></h1>
 	<h2>Dream Form</h2>
     <form action="#" th:action="@{/dream}" th:object="${dream}" method="post">
     	<p>Date: <input type="text" th:field="*{date}" /></p>

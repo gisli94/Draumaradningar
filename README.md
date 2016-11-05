@@ -8,4 +8,4 @@
 + skrifaðu gradle build
 + skrifaðu gradle wrapper
 + skrifaðu ./gradlew bootRun
-+ þá er þetta aðgengilegt á localhost:8080/dream
++ þá er þetta aðgengilegt á localhost:8080/login
