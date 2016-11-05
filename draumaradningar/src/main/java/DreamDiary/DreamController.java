@@ -27,5 +27,21 @@ public class DreamController {
 		model.addAttribute("dream", dream);
         return "dream";
     }
+   
+   @GetMapping("/guestDream")
+    public String guestDreamForm(Model model) {
+        model.addAttribute("dream", new Dream());
+        //model.addAttribute("interpretation", new Interpretation ());
+        return "guestDream";
+    }
 
+    @PostMapping("/guestDream")
+    public String gusetDreamSubmit(@ModelAttribute Dream dream, Model model) {
+    	//dream.setDate(dream.getDate());
+    	//dream.setAnswer(new StringBuilder(dream.getContent()).reverse().toString());
+    	//interpretation.setDream(dream);
+        //Interpretation.interpret(dream);
+		model.addAttribute("dream", dream);
+        return "guestDream";
+    }
 }
