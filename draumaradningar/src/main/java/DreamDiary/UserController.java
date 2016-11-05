@@ -1,5 +1,5 @@
 package DreamDiary;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,6 +15,7 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
@@ -54,17 +55,16 @@ public class LoginController extends WebMvcConfigurerAdapter {
 	
 	//For receiveing data from loginform POSTed to /login
 	@PostMapping("/login")
-    public String userInfoSubmit(@Valid User userinfo, BindingResult bindingResult, Model model, Errors errors) {
-		userinfo.setPasswordConfirm(userinfo.getPassword());
+    public String userInfoSubmit(@Valid User userinfo, final RedirectAttributes redirectAttributes, BindingResult bindingResult, Model model, Errors errors) {
 		if (bindingResult.hasErrors()) {
-            System.out.println(errors.toString());
 			return "login";
         }
-
+		redirectAttributes.addFlashAttribute("user", userinfo);
 		//validate user here?
 		//databaseController.getUser(userinfo.name, userinfo.password)
-		model.addAttribute("user", userinfo);
-        return "result";	
+		//model.addAttribute("user", userinfo);
+		return "redirect:/dream";
+		
     }
 	/*
 	
@@ -88,7 +88,7 @@ public class newUserController{
 	
 	//For creating a new user
 	@PostMapping("/newUser")
-	public String RequestNewUser(@Valid User userinfo, BindingResult bindingResult, Model model, Errors errors){
+	public String RequestNewUser(@Valid User userinfo,final RedirectAttributes redirectAttributes, BindingResult bindingResult, Model model, Errors errors){
 		if (bindingResult.hasErrors()) {
             return "newUser";
         }
@@ -97,8 +97,9 @@ public class newUserController{
 			return "newUser";
 		}
 		//DatabaseController.addUser(userinfo);
-		model.addAttribute("user", userinfo);
-		return "result";
+		//til ad koma gognum milli controllera
+		redirectAttributes.addFlashAttribute("user", userinfo);
+		return "redirect:/dream";
 	}
 	
 	//for displaying the form for registering a new user
