@@ -3,12 +3,12 @@ import java.util.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Pattern;
-import javax.persistence.Entity;
+//import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+//@Entity
 //@Table(name = "user")
 public class User {
 
@@ -16,12 +16,12 @@ public class User {
   @Size(min=2, max=30)
   private String name;
     
-  @NotNull
-  @Size(min=8, max=30)
+  //@NotNull
+  @Size(min=5, max=30)
   private String password;
   
   //@NotNull
-  @Size(min=8, max=30)
+  @Size(min=5, max=30)
   private String passwordConfirm;
   
   private int id;
@@ -82,7 +82,7 @@ public class User {
   }
 
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
   public int getId() {
     return id;
   }

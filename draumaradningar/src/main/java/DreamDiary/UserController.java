@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.validation.Errors;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.social.connect.ConnectionRepository;
@@ -19,7 +18,8 @@ import javax.validation.Valid;
 @Controller
 public class UserController{
 	
-
+	DatabaseController db = new DatabaseController();
+	
 	@Controller
 	public class LoginController extends WebMvcConfigurerAdapter {
 
@@ -40,17 +40,21 @@ public class UserController{
 		
 		//For receiveing data from loginform POSTed to /login
 		@PostMapping("/login")
-		public String userInfoSubmit(@Valid User userinfo, final RedirectAttributes redirectAttributes, BindingResult bindingResult, Model model, Errors errors) {
+		public String userInfoSubmit(@Valid User userinfo, BindingResult bindingResult, final RedirectAttributes redirectAttributes, Model model, Errors errors) {
 			if (bindingResult.hasErrors()) {
 				return "login";
 			}
 			
-			//validate user here?
-			//databaseController.getUser(userinfo.name, userinfo.password)
-			//model.addAttribute("user", userinfo);
-			redirectAttributes.addFlashAttribute("user", userinfo);
-			return "redirect:/dream";
-			
+			//Validate user
+			User[] usrs = db.getUsers(userinfo.getName(), userinfo.getPassword());
+			if(usrs.length == 0){
+				errors.rejectValue("name", "","Wrong user name or password");
+				return "login";
+			}
+			else{
+				redirectAttributes.addFlashAttribute("user", usrs[0]);
+				return "redirect:/dream";
+			}
 		}
 		/*
 		
@@ -75,6 +79,7 @@ public class UserController{
 		//For creating a new user
 		@PostMapping("/newUser")
 		public String RequestNewUser(@Valid User userinfo,final RedirectAttributes redirectAttributes, BindingResult bindingResult, Model model, Errors errors){
+			//error checking
 			if (bindingResult.hasErrors()) {
 				return "newUser";
 			}
@@ -82,7 +87,12 @@ public class UserController{
 				errors.rejectValue("passwordConfirm", "","Your passwords don't match");
 				return "newUser";
 			}
-			//DatabaseController.addUser(userinfo);
+			//create user in database
+			boolean ins = db.addUser(userinfo); 
+			if(!ins){
+				errors.rejectValue("name", "","Username taken");
+				return "newUser";
+			}
 			//til ad koma gognum milli controllera
 			redirectAttributes.addFlashAttribute("user", userinfo);
 			return "redirect:/dream";
