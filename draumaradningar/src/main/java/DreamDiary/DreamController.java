@@ -14,17 +14,19 @@ public class DreamController {
     @GetMapping("/dream")
     public String dreamForm(Model model) {
         model.addAttribute("dream", new Dream());
+        model.addAttribute("user", new User());
         //model.addAttribute("interpretation", new Interpretation ());
         return "dream";
     }
 
     @PostMapping("/dream")
-    public String dreamSubmit(@ModelAttribute Dream dream, Model model) {
+    public String dreamSubmit(@ModelAttribute Dream dream, @ModelAttribute User user, Model model) {
     	//dream.setDate(dream.getDate());
     	//dream.setAnswer(new StringBuilder(dream.getContent()).reverse().toString());
     	//interpretation.setDream(dream);
         //Interpretation.interpret(dream);
 		model.addAttribute("dream", dream);
+        model.addAttribute("user", user);
         return "dream";
     }
    
