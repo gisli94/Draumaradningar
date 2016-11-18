@@ -1,5 +1,6 @@
 package DreamDiary.controllers;
 import DreamDiary.entities.*;
+import DreamDiary.services.UserService;
 
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import javax.validation.Valid;
 @Controller
 public class UserController{
 	
-	DatabaseController db = new DatabaseController();
+	UserService userService = new UserService();
 	
 	@Controller
 	public class LoginController extends WebMvcConfigurerAdapter {
@@ -46,14 +47,14 @@ public class UserController{
 				return "login";
 			}
 			
-			//Validate user
-			User[] usrs = db.getUsers(userinfo.getName(), userinfo.getPassword());
-			if(usrs.length == 0){
+			//validate user
+			User user = userService.loginUser(userinfo);
+			if(user == null){
 				errors.rejectValue("name", "","Wrong user name or password");
 				return "login";
 			}
 			else{
-				redirectAttributes.addFlashAttribute("user", usrs[0]);
+				redirectAttributes.addFlashAttribute("user", user);
 				return "redirect:/dream";
 			}
 		}
@@ -89,8 +90,7 @@ public class UserController{
 				return "newUser";
 			}
 			//create user in database
-			boolean ins = db.addUser(userinfo); 
-			if(!ins){
+			if(!userService.createUser(userinfo)){
 				errors.rejectValue("name", "","Username taken");
 				return "newUser";
 			}
