@@ -8,7 +8,7 @@
 + skrifaðu gradle build
 + skrifaðu gradle wrapper
 + skrifaðu ./gradlew bootRun
-+ þá er þetta aðgengilegt á localhost:8080/login
++ þá er þetta aðgengilegt á localhost:8080/
 + skrifaðu gradle clean  til ad eyda öllum build skram (möppunni draumaradningar/build/)
 + please CLEAN before committing to github
 
