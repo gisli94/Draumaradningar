@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
- 	<h1>Welcome <p th:if="${user.name}" th:text="${user.name}"/></h1>
+ 	<h1>Welcome <p th:if="${#httpServletRequest.remoteUser}" th:text="${#httpServletRequest.remoteUser}"/></h1>
 	<h2>Dream Form</h2>
     <form action="#" th:action="@{/dream}" th:object="${dream}" method="post">
     	<p>Date: <input type="text" th:field="*{date}" /></p>
@@ -15,5 +15,10 @@
     <h1>Result</h1>
     <p th:text="'date: ' + ${dream.date}"/>
     <p th:text="'answer: ' + ${dream.interpretation}"/>
+	
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Útskrá"/>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	</form>
 </body>
 </html>

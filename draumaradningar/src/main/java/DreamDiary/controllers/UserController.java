@@ -2,6 +2,7 @@ package DreamDiary.controllers;
 import DreamDiary.entities.*;
 import DreamDiary.services.UserService;
 
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class UserController{
@@ -36,32 +38,37 @@ public class UserController{
 		//For displaying the login page
 		@GetMapping("/login")
 		public String userInfoForm(Model model) {
+			
 			model.addAttribute("user", new User());
 			return "login";
 		}
-		
-		//For receiveing data from loginform POSTed to /login
-		@PostMapping("/login")
-		public String userInfoSubmit(@Valid User userinfo, BindingResult bindingResult, final RedirectAttributes redirectAttributes, Model model, Errors errors) {
+
+//urelt !?
+		//For receiveing data from loginform POSTed to /login w.o. spring security
+/*		@PostMapping("/login")
+		public String userInfoSubmit(@Valid User userinfo, BindingResult bindingResult, Principal principal, Model model, Errors errors) {
 			if (bindingResult.hasErrors()) {
 				return "login";
 			}
 			
 			//validate user
-			User user = userService.loginUser(userinfo);
+			/*User user = userService.loginUser(userinfo);
 			if(user == null){
 				errors.rejectValue("name", "","Wrong user name or password");
 				return "login";
 			}
 			else{
-				redirectAttributes.addFlashAttribute("user", user);
-				return "redirect:/dream";
-			}
+				String use = principal.getName();
+				System.out.println(use);
+				System.out.println(principal);
+				model.addAttribute("user", principal);
+				return "dream";
+			//}
 		}
-		/*
-		
+		*/
+//fer annad		
 		//For when connecting to facebook
-		@GetMapping("/login")
+	/*	@GetMapping("/login")
 		public String helloFacebook(Model model) {
 			if (connectionRepository.findPrimaryConnection(Facebook.class) == null) {
 				return "login";
@@ -72,7 +79,7 @@ public class UserController{
 			model.addAttribute("feed", feed);
 			return "result";
 		}
-		*/
+	*/	
 	}
 
 	@Controller
