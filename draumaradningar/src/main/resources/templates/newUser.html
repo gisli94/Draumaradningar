@@ -4,51 +4,55 @@
 <head>
     <title>Signup page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel = "stylesheet" type = "text/css" href = "./css/styles.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
-<body class="full_newUser">
-  <div class="container">
-    <div class="page-header">
-    	<h1>Skráðu þig sem notanda Draumadagbókarinnar</h1>
-    </div>
-        <form action="#" th:action="@{/newUser}" th:object="${user}" method="post">
-    		<table>
-    <!-- 			<tr>
-    				<td>UserName:</td>
-    				<td><input type="text" th:field="*{username}" /></td>
-    				<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</td>
-    			</tr>
-    -->
-    			<tr>
-    				<td><div class="form-group"><input type="text" th:field="*{name}" placeholder="Jón Hreggviðsson"/></div></td>
-    				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"><span class="message">Villa við skráningu nafns</span></td>
-    			</tr>
-    			<tr>
-    				<td><div class="form-group"><input type="password" th:field="*{password}" placeholder="Lykilorð"/></div></td>
-    				<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"><span class="message">Villa við skráningu lykilorðs</span></td>
-    			</tr>
-    			<tr>
-    				<td><div class="form-group"><input type="password" th:field="*{passwordConfirm}" placeholder="Lykilorð aftur"/></div></td>
-    				<td th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"><span class="message">Villa í staðfestingu lykilorðs</span></td>
-    			</tr>
-    <!-- 			<tr>
-    				<td>E-mail:</td>
-    				<td><input type="text" th:field="*{email}" /></td>
-    				<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">E-mail error</td>
-    			</tr>
-    -->
-    			<tr>
-    				<td><button type="submit" class="btn-default btn-lg">Skrá mig</button></td>
-    			</tr>
-    		</table>
-        </form>
-        <div class="form-group">
-        	<form action="/connect/facebook" method="POST">
-        		<input type="hidden" name="scope" value="user_posts" />
-        		<p><button type="submit" class="btn-default btn-lg">Skrá mig inn í gegnum Facebook</button></p>
-        	</form>
-        </div>
-  </div>
+<body>
+	<h1>Signup Form</h1>
+    <form action="#" th:action="@{/newUser}" th:object="${user}" method="post">
+		<table>
+<!-- 			<tr>
+				<td>UserName:</td>
+				<td><input type="text" th:field="*{username}" /></td>
+				<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</td>
+			</tr>
+-->
+			<tr>
+				<td>Full Name:</td>
+				<td><input type="text" th:field="*{name}" /></td>
+				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input type="password" th:field="*{password}" /></td>
+				<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+			</tr>
+			<tr>
+				<td>Confirm Password</td>
+				<td><input type="password" th:field="*{passwordConfirm}" /></td>
+				<td th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}">Confirm Password Error</td>
+			</tr>
+<!-- 			<tr>
+				<td>E-mail:</td>
+				<td><input type="text" th:field="*{email}" /></td>
+				<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">E-mail error</td>
+			</tr>
+-->
+			<tr>
+				<td><button type="submit">Submit</button></td>
+			</tr>
+		</table>
+    </form>
+
+
+	<h3>Connect to Facebook</h3>
+
+	<form action="/connect/facebook" method="POST">
+		<input type="hidden" name="scope" value="user_posts" />
+		<div class="formInfo">
+			<p>Click the button to connect this application with your Facebook account.</p>
+		</div>
+		<p><button type="submit">Connect to Facebook</button></p>
+	</form>
+
 </body>
 </html>
