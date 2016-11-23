@@ -11,7 +11,5 @@
 + þá er þetta aðgengilegt á localhost:8080/
 + skrifaðu gradle clean  til ad eyda öllum build skram (möppunni draumaradningar/build/)
 + please CLEAN before committing to github
-
-update 19/11
-Spring Security now in play. Not connected to user database for authentication yet so only single user able to login:
++ Spring Security now in play. Ekki tengt vid gagnagrunn for authentication yet thannig ad notid notanda og lykilord:
 user - password
