@@ -52,7 +52,9 @@ public class DreamController {
     public String diaryList(Model model) {
         
         DatabaseController db = new DatabaseController();
+        // Hérna!!!
         Dream[] temp = db.getDreams(9);
+        //
         Dream[] dreams = new Dream[10];
         int l = temp.length;
         for (int i = 0; i < l; i++){
@@ -61,12 +63,7 @@ public class DreamController {
         for (int i = l; i < 10; i++){
             dreams[i] = new Dream();
         }
-        //Dream dream = dreams[0];
         model.addAttribute("dreams", dreams);
-        
-        //System.out.println(dream);
-        
-        //model.addAttribute("dream", new Dream());
         return "diary";
     }
 }
