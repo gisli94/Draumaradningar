@@ -21,7 +21,7 @@ public class User {
   private String password;
   
   //@NotNull
-  @Size(min=5, max=30)
+  //@Size(min=5, max=30)
   private String passwordConfirm;
   
   private int id;
