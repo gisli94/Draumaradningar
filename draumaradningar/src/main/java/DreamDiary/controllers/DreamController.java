@@ -52,7 +52,6 @@ public class DreamController {
     public String diaryList(Model model) {
         
         DatabaseController db = new DatabaseController();
-<<<<<<< HEAD
         // Hérna!!!
         Dream[] temp = db.getDreams(9);
         //
@@ -64,9 +63,6 @@ public class DreamController {
         for (int i = l; i < 10; i++){
             dreams[i] = new Dream();
         }
-=======
-        Dream[] dreams = db.getDreams(9);
->>>>>>> origin/master
         model.addAttribute("dreams", dreams);
         return "diary";
     }
