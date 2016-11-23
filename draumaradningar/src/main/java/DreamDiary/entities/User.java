@@ -25,16 +25,19 @@ public class User {
   private String passwordConfirm;
   
   private int id;
-  protected List<Dream> dreamList = new ArrayList<Dream>();
+  protected List<Dream> dreamList;
 
   //Constructors
   //Needed for init
-  public User(){}
+  public User(){
+	  dreamList = new ArrayList<Dream>();
+  }
   
   public User(int userId, String userName, String userPassword) {
     this.name = userName;
     this.id = userId;
     this.password = userPassword;
+	this.dreamList = new ArrayList<Dream>();
   }
 
 
@@ -105,6 +108,22 @@ public class User {
 
   public void setPasswordConfirm(String new_password) {
     this.passwordConfirm = new_password;
+  }
+  
+  public void setDreams(List<Dream> dreams){
+	  this.dreamList = dreams;
+  }
+  public void resetDreams(){
+	  this.dreamList = new ArrayList<Dream>();
+  }
+  
+  public List<Dream> getDreams(){
+	  return this.dreamList;
+  }
+  
+  public void addDream(Dream dream){
+	  this.dreamList.add(dream);
+	  
   }
   public String toString(){
     return "" + id + " " + name + " " + password;

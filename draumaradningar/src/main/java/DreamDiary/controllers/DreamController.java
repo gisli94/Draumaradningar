@@ -1,5 +1,6 @@
 package DreamDiary.controllers;
 import DreamDiary.entities.*;
+import DreamDiary.services.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,63 +12,35 @@ import org.springframework.validation.BindingResult;
 
 @Controller
 public class DreamController {
-
+	private DreamService dreamService;
+	private UserService userService;
+	
+	
     @GetMapping("/dream")
     public String dreamForm(Model model) {
         model.addAttribute("dream", new Dream());
-        //model.addAttribute("user", new User());
-        //model.addAttribute("interpretation", new Interpretation ());
         return "dream";
     }
 
     @PostMapping("/dream")
     public String dreamSubmit(@ModelAttribute Dream dream, @ModelAttribute User user, Model model) {
-    	//dream.setDate(dream.getDate());
-    	//dream.setAnswer(new StringBuilder(dream.getContent()).reverse().toString());
-    	//interpretation.setDream(dream);
-        //Interpretation.interpret(dream);
-		model.addAttribute("dream", dream);
-        model.addAttribute("user", user);
-        return "dream";
+		userService = new UserService(user);
+		model.addAttribute("user", userService.linkDream(dream));
+		return "dream";
     }
    
     @GetMapping("/guestDream")
     public String guestDreamForm(Model model) {
         model.addAttribute("dream", new Dream());
-        //model.addAttribute("interpretation", new Interpretation ());
         return "guestDream";
     }
 
     @PostMapping("/guestDream")
-    public String gusetDreamSubmit(@ModelAttribute Dream dream, Model model) {
-    	//dream.setDate(dream.getDate());
-    	//dream.setAnswer(new StringBuilder(dream.getContent()).reverse().toString());
-    	//interpretation.setDream(dream);
-        //Interpretation.interpret(dream);
-		model.addAttribute("dream", dream);
+    public String guestDreamSubmit(@ModelAttribute Dream dream, Model model) {
+		this.dreamService = new DreamService(dream);
+		model.addAttribute("dream", this.dreamService.guestDream());
         return "guestDream";
     }
 
-    @GetMapping("/diary")
-    public String diaryList(Model model) {
-        
-        DatabaseController db = new DatabaseController();
-<<<<<<< HEAD
-        // Hérna!!!
-        Dream[] temp = db.getDreams(9);
-        //
-        Dream[] dreams = new Dream[10];
-        int l = temp.length;
-        for (int i = 0; i < l; i++){
-            dreams[i] = temp[i];
-        }
-        for (int i = l; i < 10; i++){
-            dreams[i] = new Dream();
-        }
-=======
-        Dream[] dreams = db.getDreams(9);
->>>>>>> origin/master
-        model.addAttribute("dreams", dreams);
-        return "diary";
-    }
+
 }

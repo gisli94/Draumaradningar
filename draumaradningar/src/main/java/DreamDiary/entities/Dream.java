@@ -1,5 +1,6 @@
 package DreamDiary.entities;
 
+
 import java.util.*;
 import java.time.LocalDate;
 
@@ -12,9 +13,12 @@ public class Dream {
     private String content;
     private int id;
     private LocalDate date;
-    private Interpretation interpretation;
+    private String interpretation;
 
-	public Dream(){}
+	public Dream(){
+		
+	}
+	
 	
     public Dream(String name, int userId, String content, int id) {
         this.name = name;
@@ -22,10 +26,10 @@ public class Dream {
         this.content = content;
         this.id = id;
         this.date = LocalDate.now();
-        this.interpretation = new Interpretation();
+        // this.interpretation = new Interpretation();
     }
 
-    public Dream(int id, int userId, LocalDate date, String name, String content, Interpretation interpretation){
+    public Dream(int id, int userId, LocalDate date, String name, String content, String interpretation){
         this.name = name;
         this.userId = userId;
         this.content = content;
@@ -94,15 +98,15 @@ public class Dream {
         this.date = new_date;
     }
 
-    public Interpretation getInterpretation(){
+    public String getInterpretation(){
         return interpretation;
     }
 
-    public void setInterpretation(Interpretation new_interpretation){
+    public void setInterpretation(String new_interpretation){
         this.interpretation = new_interpretation;
     }
 
     public String toString(){
-        return ("" + name + " " + userId + " " + content + " " + id + " " + date + " " + interpretation.getContent());
+        return ("" + name + " " + userId + " " + content + " " + id + " " + date + " " + interpretation);
     }
 }

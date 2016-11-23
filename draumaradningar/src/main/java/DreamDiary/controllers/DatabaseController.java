@@ -53,11 +53,11 @@ public class DatabaseController{
 	public boolean addDream(Dream dream) {
         // name, userid, content, id, date, interpretation
         //String sql = "INSERT INTO DREAMS (name, userid, content, id, date, interpretation) VALUES ('1', 'Mig dreymdi ís.', '123', 'Þú munt deyja á morgun.', '999');";
-		String sql = "INSERT INTO DREAMS (id, userid, date, name, content, interpretation) VALUES ('" + dream.getId() + "', '" + dream.getUserId() + "', '" + dream.getDate() + "', '" + dream.getName() + "', '" + dream.getContent() + "', '" + dream.getInterpretation().getContent() + "');";
+		String sql = "INSERT INTO DREAMS (id, userid, date, name, content, interpretation) VALUES ('" + dream.getId() + "', '" + dream.getUserId() + "', '" + dream.getDate() + "', '" + dream.getName() + "', '" + dream.getContent() + "', '" + dream.getInterpretation() + "');";
 		return update(sql);
 	}
   
-    public Dream[] getDreams(int user) {
+    public ArrayList<Dream> getDreams(int user) {
         Connection connection = null;
         Statement statement = null;
         String str = "";
@@ -79,7 +79,7 @@ public class DatabaseController{
                 String name = rs.getString("name");
                 String content = rs.getString("content");
                 String interpretation = rs.getString("interpretation");
-                list.add(new Dream(id, userid, date, name, content, new Interpretation(interpretation)));
+                list.add(new Dream(id, userid, date, name, content,interpretation));
             }
             rs.close();
             statement.close();
@@ -91,7 +91,7 @@ public class DatabaseController{
             System.exit(0);
         }  
 
-        return list.toArray(new Dream[list.size()]);
+        return list;//.toArray(new Dream[list.size()]);
     }
 
     public boolean addUser(User user){

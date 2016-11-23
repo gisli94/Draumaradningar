@@ -43,7 +43,7 @@ public class UserController{
 			return "login";
 		}
 
-//urelt !?
+
 		//For receiveing data from loginform POSTed to /login w.o. spring security
 		@PostMapping("/login")
 		public String userInfoSubmit(@Valid User userinfo, BindingResult bindingResult, final RedirectAttributes redirectAttributes, Model model, Errors errors) {

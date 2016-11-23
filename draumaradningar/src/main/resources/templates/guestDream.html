@@ -8,7 +8,7 @@
 <body>
  	<h1>Velkomin</h1>
 	<h2>Dream Form</h2>
-    <form action="#" th:action="@{/dream}" th:object="${dream}" method="post">
+    <form action="#" th:action="@{/guestDream}" th:object="${dream}" method="post">
     	<p>Date: <input type="text" th:field="*{date}" /></p>
         <p>Dream: <input type="text" th:field="*{content}" /></p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset"/></p>
