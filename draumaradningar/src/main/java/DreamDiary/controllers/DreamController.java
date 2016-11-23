@@ -50,9 +50,16 @@ public class DreamController {
 
     @GetMapping("/diary")
     public String diaryList(Model model) {
+        
         DatabaseController db = new DatabaseController();
         Dream[] dreams = db.getDreams(9);
-        model.addAttribute("dreams", );
+        
+        //Dream dream = dreams[0];
+        model.addAttribute("dreams", dreams);
+        
+        //System.out.println(dream);
+        
+        //model.addAttribute("dream", new Dream());
         return "diary";
     }
 }
