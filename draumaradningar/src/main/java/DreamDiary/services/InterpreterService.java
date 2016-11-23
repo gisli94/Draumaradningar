@@ -1,6 +1,6 @@
-package DreamDiary.entities;
+package DreamDiary.services;
 
-public class interpreter {
+public class InterpreterService {
 	
 	private String[][] lykilord = {{"kött", "ketti", "ógæfa muni hrella þig"}, {"dauð", "dauða", "einmannaleiki gæti sagt til sín"}, {"ost", "ost", "mikil hamingja mun finna þig"}};
 	private int numBadWords = 2;
