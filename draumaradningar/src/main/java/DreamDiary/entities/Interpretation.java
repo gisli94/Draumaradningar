@@ -51,7 +51,8 @@ public class Interpretation {
 
 	public static void interpret(Dream dream) {
 		// String intr = Henrýfall(dream);
-		String intr = (new StringBuilder(dream.getContent()).reverse().toString()); //eyða þegar hitt er tilbúið
+		interpreter Greinir = new interpreter();
+		String intr = Greinir.analyzeDream(dream.getContent());
 		dream.setInterpretation(new Interpretation(intr));
 	}
 
