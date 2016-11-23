@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -15,7 +16,7 @@
     <h1>Result</h1>
     <p th:text="'date: ' + ${dream.date}"/>
     <p th:text="'answer: ' + ${dream.interpretation}"/>
-	
+
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="Útskrá"/>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
