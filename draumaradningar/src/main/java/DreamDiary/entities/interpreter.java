@@ -1,4 +1,4 @@
-package DreamDiary;
+package DreamDiary.entities;
 
 public class interpreter {
 	
