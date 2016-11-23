@@ -25,7 +25,7 @@ public class UserController{
 	UserService userService = new UserService();
 	
 	@Controller
-	public class LoginController extends WebMvcConfigurerAdapter {
+	public class LoginController {
 
 		private Facebook facebook;
 		private ConnectionRepository connectionRepository;
@@ -45,27 +45,24 @@ public class UserController{
 
 //urelt !?
 		//For receiveing data from loginform POSTed to /login w.o. spring security
-/*		@PostMapping("/login")
-		public String userInfoSubmit(@Valid User userinfo, BindingResult bindingResult, Principal principal, Model model, Errors errors) {
+		@PostMapping("/login")
+		public String userInfoSubmit(@Valid User userinfo, BindingResult bindingResult, final RedirectAttributes redirectAttributes, Model model, Errors errors) {
 			if (bindingResult.hasErrors()) {
 				return "login";
 			}
 			
 			//validate user
-			/*User user = userService.loginUser(userinfo);
+			User user = userService.loginUser(userinfo);
 			if(user == null){
 				errors.rejectValue("name", "","Wrong user name or password");
 				return "login";
 			}
 			else{
-				String use = principal.getName();
-				System.out.println(use);
-				System.out.println(principal);
-				model.addAttribute("user", principal);
-				return "dream";
-			//}
+				redirectAttributes.addFlashAttribute("user", user);
+				return "redirect:/dream";
+			}
 		}
-		*/
+		
 //fer annad		
 		//For when connecting to facebook
 	/*	@GetMapping("/login")

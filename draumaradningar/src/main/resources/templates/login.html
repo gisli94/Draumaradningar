@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h2>Innskráning</h2>
-	<form name="f" th:action="@{/login}" method="post">
+    <form name='f' th:action="@{/login}" th:object="${user}" method="post">
 	<table>
 		<tr th:if="${param.error}" >
 			Ógilt notendanafn eða lykilorð.
@@ -16,12 +16,14 @@
 			Þú hefur verið útskráð/ur.
 		</tr>
 		<tr>
-			<td><label for="username">Notandanafn</label></td>
-			<td><input type="text" id="username" name="username"/></td>
+			<td><label for="name">Notandanafn</label></td>
+				<td><input type="text" th:field="*{name}" /></td>
+				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
 		</tr>
 		<tr>
 			<td><label for="password">Lykilorð</label></td>
-			<td><input type="password" id="password" name="password"/> </td>
+			<td><input type="password" th:field="*{password}" /></td>
+			<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
 		</tr>
 		<tr>
 			<td><button type="submit" class="btn">Innskrá</button></td>
