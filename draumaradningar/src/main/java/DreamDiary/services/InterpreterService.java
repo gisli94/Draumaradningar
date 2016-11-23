@@ -5,7 +5,10 @@ public class InterpreterService {
 	private String[][] lykilord = { 
 									{"kött", "ketti", "ógæfa muni hrella þig á næstunni."},
 									{"dauð", "dauða", "einmannaleiki gæti verið að hrjá þig meir en en þú heldur."},
-									{"ost", "ost", "mikil hamingja mun finna þig á komandi árum."},
+									{"þjóf", "þjófnað", "manni finnst maður ekki nógu öruggur"},
+									{"fljú", "flug", "að það sé atburður í lífi einstaklings sem er að fara úr böndunum"},
+									{"halda framhjá", "framhjáhald", "maki/unnussti sé ekki að eyða nægilegum tíma með þér að þínu mati."},
+									{"flýg", "flug", "að það sé atburður í lífi einstaklings sem er að fara úr böndunum"},
 									{"dett", "fall", "þú þurfir að létta á álagi í lífi þínu, oft tengt vinnu og/eða skóla."}, 
 									{"fall", "fall", "þú þurfir að létta á álagi í lífi þínu, oft tengt vinnu og/eða skóla."},
 									{"tenn", "tennur", "möguleiki sé á yfirvofandi dauðsföllum í fjölskyldunnni þinni."},
@@ -13,14 +16,12 @@ public class InterpreterService {
 									{"próf", "próf", "Þú hefur áhyggur af skipulagi þínu og ættir að skipuleggja þig betur."}, 
 									{"fræg", "hittingar við frægt fólk", "það gæti verið að hrjá þér að þér finnist þú ekki njóta nnnógu mikillar viðrkenningar."},
 									{"elt", "vera eltur", "unndirmeðvitundinn að hvetja dreumanda til verks."},
-									{"halda framhjá", "framhjáhald", "maki/unnussti sé ekki að eyða nægilegum tíma með þér að þínu mati."},
 									{"sein", "seinkun", "Heilinn sjé að vara mann við að taka ekki meir að sér en maður ræður við."},
-									{"fljú", "flug", "að það sé atburður í lífi einstaklings sem er að fara úr böndunum"},
-									{"flýg", "flug", "að það sé atburður í lífi einstaklings sem er að fara úr böndunum"},
-									{"ólétt", "ólétta", "þér finnst þú vera reiðubúinnn að taka á þig fleiri verkefni en þú hefur undanfarið."},
-									{"þjóf", "þjófnað", "manni finnst maður ekki nógu öruggur"}
+									{"ost", "ost", "mikil hamingja mun finna þig á komandi árum."},
+									{"ólétt", "ólétta", "þér finnst þú vera reiðubúinnn að taka á þig fleiri verkefni en þú hefur undanfarið."}
+									
 								  };
-	private int numBadWords = 2;
+	private int numBadWords = 12;
 	
 	//current dream variables
 	private int length = 0;
