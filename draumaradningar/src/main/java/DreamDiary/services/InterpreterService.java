@@ -40,7 +40,7 @@ public class InterpreterService {
 	public String analyzeDream(String dream) {
 		resetCurrentVars();
 		gatherInfo(dream);
-		if(length < 18) return "vinsamlegast skrifa lengri/ítarlegri lýsingu ef þú villt fá túlkun."
+		if(length < 18) return "vinsamlegast skrifa lengri/ítarlegri lýsingu ef þú villt fá túlkun.";
 		dream = geraGreiningu();
 		return dream;
 	}
