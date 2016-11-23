@@ -2,7 +2,24 @@ package DreamDiary.services;
 
 public class InterpreterService {
 	
-	private String[][] lykilord = {{"kött", "ketti", "ógæfa muni hrella þig"}, {"dauð", "dauða", "einmannaleiki gæti sagt til sín"}, {"ost", "ost", "mikil hamingja mun finna þig"}};
+	private String[][] lykilord = { 
+									{"kött", "ketti", "ógæfa muni hrella þig á næstunni."},
+									{"dauð", "dauða", "einmannaleiki gæti verið að hrjá þig meir en en þú heldur."},
+									{"ost", "ost", "mikil hamingja mun finna þig á komandi árum."},
+									{"dett", "fall", "þú þurfir að létta á álagi í lífi þínu, oft tengt vinnu og/eða skóla."}, 
+									{"fall", "fall", "þú þurfir að létta á álagi í lífi þínu, oft tengt vinnu og/eða skóla."},
+									{"tenn", "tennur", "möguleiki sé á yfirvofandi dauðsföllum í fjölskyldunnni þinni."},
+									{"naki", "nekt", "þú hafir líklegast miklar áhyggjur af yfirvofandi stöðuhækkun eða aukinnni ábyrgð."}, 
+									{"próf", "próf", "Þú hefur áhyggur af skipulagi þínu og ættir að skipuleggja þig betur."}, 
+									{"fræg", "hittingar við frægt fólk", "það gæti verið að hrjá þér að þér finnist þú ekki njóta nnnógu mikillar viðrkenningar."},
+									{"elt", "vera eltur", "unndirmeðvitundinn að hvetja dreumanda til verks."},
+									{"halda framhjá", "framhjáhald", "maki/unnussti sé ekki að eyða nægilegum tíma með þér að þínu mati."},
+									{"sein", "seinkun", "Heilinn sjé að vara mann við að taka ekki meir að sér en maður ræður við."},
+									{"fljú", "flug", "að það sé atburður í lífi einstaklings sem er að fara úr böndunum"},
+									{"flýg", "flug", "að það sé atburður í lífi einstaklings sem er að fara úr böndunum"},
+									{"ólétt", "ólétta", "þér finnst þú vera reiðubúinnn að taka á þig fleiri verkefni en þú hefur undanfarið."},
+									{"þjóf", "þjófnað", "manni finnst maður ekki nógu öruggur"}
+								  };
 	private int numBadWords = 2;
 	
 	//current dream variables
@@ -22,6 +39,7 @@ public class InterpreterService {
 	public String analyzeDream(String dream) {
 		resetCurrentVars();
 		gatherInfo(dream);
+		if(length < 18) return "vinsamlegast skrifa lengri/ítarlegri lýsingu ef þú villt fá túlkun."
 		dream = geraGreiningu();
 		return dream;
 	}
@@ -34,7 +52,7 @@ public class InterpreterService {
 	//			á draumnum
 	private void gatherInfo(String dream) {
 		length 			= dream.length();
-		lengthClass 	= (int)Math.floor(this.length/40);
+		lengthClass 	= (int)Math.floor(this.length/35);
 		vowels			= countVowels(dream);
 		keywords		= fetchKeywords(dream);
 	}
@@ -123,18 +141,25 @@ public class InterpreterService {
 	private String interpKeywords() {
 		String temp = "";
 		int lokaVar = 4; //is the interpretation posetive/negative or both? p=0, n=1, b=2.
-		for(int i = 0; i < keywords.length; i++){
-			if(i > 0) temp += returnGenericConecter();
-			else 	  temp += (returnGenericStart() + "\n");
-			temp += returnGenericStart2();
-			temp += (lykilord[keywords[i]][1] + " ");
-			temp += returnGenericStuff();
-			temp += (lykilord[keywords[i]][2] + " ");
-			temp += returnGenericTimeStuff();
-			lokaVar = calculateLokaVar(lokaVar, i);
+		if(keywords.length == 0){
+				//tóts send dream to database for interreting here:
+				//tótZeFunction()
+				temp += "Þessi draumur hefur þó ekki komið svona fyrir áður hjá okkur en hann hefur verið sendur nafnlaust til túlkunnar (tótz). ";
+				temp += returnLokaOrd(2);
+		} else {
+			for(int i = 0; i < keywords.length; i++){
+				if(i > 0) temp += returnGenericConecter();
+				else 	  temp += (returnGenericStart() + "\n");
+				temp += returnGenericStart2();
+				temp += (lykilord[keywords[i]][1] + " ");
+				temp += returnGenericStuff();
+				temp += (lykilord[keywords[i]][2] + " ");
+				//temp += returnGenericTimeStuff();
+				lokaVar = calculateLokaVar(lokaVar, i);
+			}
+			if(lokaVar == 4) lokaVar = 0;
+			temp += returnLokaOrd(lokaVar);
 		}
-		if(lokaVar == 4) lokaVar = 0;
-		temp += returnLokaOrd(lokaVar);
 		return temp;
 	}
 	
@@ -213,7 +238,7 @@ public class InterpreterService {
 	
 	private String returnGenericTimeStuff() {
 		String[] genericStuff = {	
-			"á næstu dögum. ", "á næstunni. ", "í framtíð þinni. ", "á komandi dögum. ", "þessa vikuna. "
+			"á næstu dögum. ", "á næstunni. ", "í framtíð þinni. ", "á komandi dögum. "
 		};
 		return pickRand(genericStuff);
 	}
