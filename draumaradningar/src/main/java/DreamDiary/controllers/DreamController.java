@@ -31,7 +31,7 @@ public class DreamController {
         return "dream";
     }
    
-   @GetMapping("/guestDream")
+    @GetMapping("/guestDream")
     public String guestDreamForm(Model model) {
         model.addAttribute("dream", new Dream());
         //model.addAttribute("interpretation", new Interpretation ());
@@ -46,5 +46,13 @@ public class DreamController {
         //Interpretation.interpret(dream);
 		model.addAttribute("dream", dream);
         return "guestDream";
+    }
+
+    @GetMapping("/diary")
+    public String diaryList(Model model) {
+        DatabaseController db = new DatabaseController();
+        Dream[] dreams = db.getDreams(9);
+        model.addAttribute("dreams", );
+        return "diary";
     }
 }
