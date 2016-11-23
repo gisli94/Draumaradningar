@@ -99,7 +99,7 @@ public class DatabaseController{
     }
 
     public boolean addUser(User user){
-        String sql = "INSERT INTO USERS (id, name, password) VALUES ('" + user.getId() + "', '" + user.getName() + "', '" + user.getPassword() + "')";
+        String sql = "INSERT INTO USERS2 (name, password) VALUES ('" + user.getName() + "', '" + user.getPassword() + "')";
         return update(sql);
     }
     
@@ -114,7 +114,7 @@ public class DatabaseController{
             connection = DriverManager.getConnection("jdbc:postgresql://horton.elephantsql.com:5432/afkfpofr",
             "afkfpofr", "C2UETIervjxGCirloUj6XhQMC3T_z4XS");
             statement = connection.createStatement();
-            String sql = "SELECT * FROM USERS WHERE name='" + user + "' AND password='" + pass + "';";
+            String sql = "SELECT * FROM USERS2 WHERE name='" + user + "' AND password='" + pass + "';";
             // SELECT * FROM USERS WHERE name='Gísli' AND password='asdf';
                 
             ResultSet rs = statement.executeQuery(sql);

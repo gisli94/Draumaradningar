@@ -84,8 +84,8 @@ public class User {
     this.name = new_name;
   }
 
-    @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @Id
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
   public int getId() {
     return id;
   }

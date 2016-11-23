@@ -16,17 +16,16 @@
 	
     <h1>Draumar þínir og ráðningar þeirra</h1>
     <table>
-		<tr th:each="user.dreams:*{dream}" th:object="${user.dreams}">
-			<td><h3 th:text="'Dagsetning: ' + ${dream.date}"/></td>
-			<td><p th:text="'Draumur: ' + ${dream.content}"/></td>
-			<td><p th:text="'Túlkun: ' + ${dream.interpretation}"/></td>
+		<tr th:each="olddream:${dreams}" >
+			<td><h3 th:text="'Dagsetning: ' + ${olddream.date}"/></td>
+			<td><p th:text="'Draumur: ' + ${olddream.content}"/></td>
+			<td><p th:text="'Túlkun: ' + ${olddream.interpretation}"/></td>
 		</tr>
 	</table>
 				
 
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="Útskrá"/>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	</form>
 </body>
 </html>

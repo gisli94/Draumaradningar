@@ -6,10 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.validation.Errors;
 import org.springframework.validation.BindingResult;
 
+@SessionAttributes("user")
 @Controller
 public class DreamController {
 	private DreamService dreamService;
@@ -17,15 +20,19 @@ public class DreamController {
 	
 	
     @GetMapping("/dream")
-    public String dreamForm(Model model) {
+    public String dreamForm(@ModelAttribute User user, Model model) {
         model.addAttribute("dream", new Dream());
+		model.addAttribute("user", user);
+		model.addAttribute("dreams", user.getDreams());
         return "dream";
     }
 
     @PostMapping("/dream")
     public String dreamSubmit(@ModelAttribute Dream dream, @ModelAttribute User user, Model model) {
-		userService = new UserService(user);
+		userService = new UserService(user); 
 		model.addAttribute("user", userService.linkDream(dream));
+		model.addAttribute("dreams", user.getDreams());
+		
 		return "dream";
     }
    
@@ -42,5 +49,10 @@ public class DreamController {
         return "guestDream";
     }
 
-
+	@PostMapping("/logout")
+	public String logoff(SessionStatus status){
+		status.setComplete();
+		return "login";
+		
+	}
 }

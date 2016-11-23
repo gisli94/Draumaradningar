@@ -25,7 +25,7 @@ public class DreamService{
 	
 	//Túlkar, tengir við notanda user og sendir inn í gagnagrunn
 	public Dream linkUser(User user){
-		this.dream.setUserId(user.getId());
+		this.dream.setUserId(user.getId());		
 		this.dream.setInterpretation(this.interp.analyzeDream(this.dream.getContent()));
 		if(logDream()){
 			return this.dream;

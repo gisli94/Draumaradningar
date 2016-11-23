@@ -53,6 +53,7 @@ public class UserController{
 			
 			//validate user
 			User user = userService.loginUser(userinfo);
+			//System.out.println(user.getId());
 			if(user == null){
 				errors.rejectValue("name", "","Wrong user name or password");
 				return "login";
