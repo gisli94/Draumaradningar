@@ -53,7 +53,11 @@ public class DatabaseController{
 	public boolean addDream(Dream dream) {
         // name, userid, content, id, date, interpretation
         //String sql = "INSERT INTO DREAMS (name, userid, content, id, date, interpretation) VALUES ('1', 'Mig dreymdi ís.', '123', 'Þú munt deyja á morgun.', '999');";
-		String sql = "INSERT INTO DREAMS (id, userid, date, name, content, interpretation) VALUES ('" + dream.getId() + "', '" + dream.getUserId() + "', '" + dream.getDate() + "', '" + dream.getName() + "', '" + dream.getContent() + "', '" + dream.getInterpretation() + "');";
+
+		//String sql = "INSERT INTO DREAMS (id, userid, date, name, content, interpretation) VALUES ('" + dream.getId() + "', '" + dream.getUserId() + "', '" + dream.getDate() + "', '" + dream.getName() + "', '" + dream.getContent() + "', '" + dream.getInterpretation() + "');";
+
+		String sql = "INSERT INTO DREAMS2 (id, userid, date, name, content, interpretation) VALUES ('" + dream.getId() + "', '" + dream.getUserId() + "', '" + dream.getDate() + "', '" + dream.getName() + "', '" + dream.getContent() + "', '" + dream.getInterpretation().getContent() + "');";
+
 		return update(sql);
 	}
   
@@ -68,7 +72,7 @@ public class DatabaseController{
             connection = DriverManager.getConnection("jdbc:postgresql://horton.elephantsql.com:5432/afkfpofr",
             "afkfpofr", "C2UETIervjxGCirloUj6XhQMC3T_z4XS");
             statement = connection.createStatement();
-            String sql = "SELECT * FROM DREAMS WHERE userid=" + user + " order by date desc limit 10";
+            String sql = "SELECT * FROM DREAMS2 WHERE userid=" + user + " order by date desc limit 10";
                 
             ResultSet rs = statement.executeQuery(sql);
                 
