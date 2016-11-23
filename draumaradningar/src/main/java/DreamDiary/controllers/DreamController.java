@@ -1,4 +1,5 @@
-package DreamDiary;
+package DreamDiary.controllers;
+import DreamDiary.entities.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

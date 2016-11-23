@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DreamDiary;
+package DreamDiary.controllers;
+import DreamDiary.entities.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+
 /**
  *
  * @author Gisli

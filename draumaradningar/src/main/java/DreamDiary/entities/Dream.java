@@ -1,4 +1,4 @@
-package DreamDiary;
+package DreamDiary.entities;
 
 import java.util.*;
 import java.time.LocalDate;
