@@ -24,6 +24,7 @@ public class DreamController {
         model.addAttribute("dream", new Dream());
 		model.addAttribute("user", user);
 		model.addAttribute("dreams", user.getDreams());
+		System.out.println("Hallo");
         return "dream";
     }
 
@@ -32,7 +33,7 @@ public class DreamController {
 		userService = new UserService(user); 
 		model.addAttribute("user", userService.linkDream(dream));
 		model.addAttribute("dreams", user.getDreams());
-		
+		System.out.println(dream);
 		return "dream";
     }
    
