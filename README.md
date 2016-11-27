@@ -11,5 +11,7 @@
 + þá er þetta aðgengilegt á localhost:8080/
 + skrifaðu gradle clean  til ad eyda öllum build skram (möppunni draumaradningar/build/)
 + please CLEAN before committing to github
-+ Spring Security now in play. Ekki tengt vid gagnagrunn for authentication yet thannig ad notid notanda og lykilord:
-user - password
+
+#### SQL töflur:
++ create table dreams2 (id serial, userid int, date Date, name varchar(50), content varchar(500), interpretation varchar(500));
++ create table users2 (id serial, name varchar(50), password varchar(50));
