@@ -3,32 +3,28 @@ import java.util.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Pattern;
-//import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//@Entity
-//@Table(name = "user")
+
 public class User {
 
   @NotNull
   @Size(min=2, max=30)
   private String name;
     
-  //@NotNull
+
   @Size(min=5, max=30)
   private String password;
   
-  //@NotNull
-  //@Size(min=5, max=30)
+
   private String passwordConfirm;
   
   private int id;
   protected List<Dream> dreamList;
 
   //Constructors
-  //Needed for init
   public User(){
 	  dreamList = new ArrayList<Dream>();
   }
@@ -39,28 +35,6 @@ public class User {
     this.password = userPassword;
 	this.dreamList = new ArrayList<Dream>();
   }
-
-
-  // Notkun: logDream(old_Dream_list, dream_text)
-  // Fyrir: dream_text er texti draumsins, fenginn ur forum submission
-  //        dream_text er a islensku(?)
-  //
-  // Eftir: Nytt Dream object hefur verid buid til og baett vid old_Dream_list
-  //        nyja Dream objectid
-  /*protected List<Dream> logDream(int dreamId, List<Dream> oldDreamList, String dream_text) {
-    Dream nyr_draumur = new Dream(dreamId, dream_text);
-    List<Dream> updatedDreamList = oldDreamList.add(nyr_draumur);
-    return updatedDreamList;
-  }*/
-
-  // þarf að laga svo það noti nýja Dream constructorinn.
-  /*
-  protected Dream logDream(int dreamId, List<Dream> oldDreamList, String dream_text) {
-    Dream nyr_draumur = new Dream(id, dreamId, dream_text);
-    return nyr_draumur;
-  }
-  */
-
 
   // Notkun:
   // Fyrir:
@@ -84,8 +58,7 @@ public class User {
     this.name = new_name;
   }
 
-    // @Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+
   public int getId() {
     return id;
   }

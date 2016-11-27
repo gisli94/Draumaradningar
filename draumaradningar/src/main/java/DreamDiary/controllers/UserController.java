@@ -17,7 +17,7 @@ import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
 import javax.validation.Valid;
-import java.security.Principal;
+
 
 @Controller
 public class UserController{
@@ -53,7 +53,6 @@ public class UserController{
 			
 			//validate user
 			User user = userService.loginUser(userinfo);
-			//System.out.println(user.getId());
 			if(user == null){
 				errors.rejectValue("name", "","Wrong user name or password");
 				return "login";
@@ -64,7 +63,7 @@ public class UserController{
 			}
 		}
 		
-//fer annad		
+		//fer annad		
 		//For when connecting to facebook
 	/*	@GetMapping("/login")
 		public String helloFacebook(Model model) {

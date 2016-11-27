@@ -15,6 +15,7 @@ public class UserService{
 	User user;
 	BCryptPasswordEncoder passencode;
 	
+	//Constructors
 	public UserService(){
 		this.datab = new DatabaseController();
 		this.user = null;
@@ -26,6 +27,7 @@ public class UserService{
 
 	}
 	
+	//link user to dream and throws it onwards towards the database
 	public User linkDream(Dream dream){
 			this.dreamService = new DreamService(dream);
 			this.dreamService.linkUser(this.user);
