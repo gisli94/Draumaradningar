@@ -99,7 +99,7 @@ public class DatabaseController{
     }
 
     public boolean addUser(User user){
-        String sql = "INSERT INTO USERS2 (name, password) VALUES ('" + user.getName() + "', '" + user.getPassword() + "')";
+        String sql = "INSERT INTO users3 (name, password) VALUES ('" + user.getName() + "', '" + user.getPassword() + "')";
         return update(sql);
     }
     
@@ -114,7 +114,7 @@ public class DatabaseController{
             connection = DriverManager.getConnection("jdbc:postgresql://horton.elephantsql.com:5432/afkfpofr",
             "afkfpofr", "C2UETIervjxGCirloUj6XhQMC3T_z4XS");
             statement = connection.createStatement();
-            String sql = "SELECT * FROM USERS2 WHERE name='" + user + "' AND password='" + pass + "';";
+            String sql = "SELECT * FROM users3 WHERE name='" + user + "' AND password='" + pass + "';";
             // SELECT * FROM USERS WHERE name='Gísli' AND password='asdf';
                 
             ResultSet rs = statement.executeQuery(sql);
@@ -137,7 +137,41 @@ public class DatabaseController{
 
         return list.toArray(new User[list.size()]);
     }
+       
+	public User[] getNamedUsers(String user){
+        Connection connection = null;
+        Statement statement = null;
+        String str = "";
+        ArrayList<User> list = new ArrayList<>();
         
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection("jdbc:postgresql://horton.elephantsql.com:5432/afkfpofr",
+            "afkfpofr", "C2UETIervjxGCirloUj6XhQMC3T_z4XS");
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM users3 WHERE name='" + user + "';";
+            // SELECT * FROM USERS WHERE name='Gísli' AND password='asdf';
+                
+            ResultSet rs = statement.executeQuery(sql);
+                
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String password = rs.getString("password");
+                list.add(new User(id, name, password));
+            }
+            rs.close();
+            statement.close();
+            //connection.commit();
+            connection.close();
+        }
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }  
+
+        return list.toArray(new User[list.size()]);
+    }
     private void createTable() {
         String sql = "CREATE TABLE DREAMS(id int, content varchar(500), date int, interp varchar(200), userid int);";
         update(sql);
