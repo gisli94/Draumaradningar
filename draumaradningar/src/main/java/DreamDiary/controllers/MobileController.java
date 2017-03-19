@@ -22,19 +22,40 @@ public class MobileController{
 	}*/
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public User MobileGuestUser(@RequestParam(value="name", defaultValue="World") @PathVariable String name) {
-        return new User();
+	public User MobileGuestUser(@RequestParam String name, @RequestParam String pass) {
+        System.out.println("GET call");
+		User us = new User();
+		us.setName(name);
+		us.setPassword(pass);
+		User user = userService.loginUser(us);
+		System.out.println(user);
+		if(user == null){
+			//errors.rejectValue("name", "","Wrong user name or password");
+			return null;
+		}
+		else{
+			user.setPassword("");
+			user.setDreams(null);
+			return user;
+		}
+		
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public User MobileGuestUser(@RequestBody User userinfo) {
+	public User MobileUser(@RequestBody User userinfo) {
 		//validate user
+		
+		System.out.println("Got Called");
+		//return "got called";
 		User user = userService.loginUser(userinfo);
+		System.out.println(user);
 		if(user == null){
 			//errors.rejectValue("name", "","Wrong user name or password");
-			return new User();
+			return null;
 		}
 		else{
+			user.setPassword("");
+			user.setDreams(null);
 			return user;
 		}
 	}
