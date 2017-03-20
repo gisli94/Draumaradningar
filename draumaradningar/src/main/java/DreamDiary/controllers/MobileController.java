@@ -1,7 +1,8 @@
 package DreamDiary.controllers;
-import DreamDiary.services.UserService;
+import DreamDiary.services.*;
 import DreamDiary.entities.*;
 
+import java.util.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping("/mobuser")
+//@RequestMapping("/mobuser")
 public class MobileController{
 	
 	UserService userService = new UserService();
+	DreamService dreamService = new DreamService();
 	
 	//not sure if needed
 /*	@RequestMapping("/mobguestuser")
@@ -21,7 +23,7 @@ public class MobileController{
         return new User();
 	}*/
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/mobuser", method = RequestMethod.GET)
 	public User MobileGuestUser(@RequestParam String name, @RequestParam String pass) {
         System.out.println("GET call");
 		User us = new User();
@@ -35,13 +37,13 @@ public class MobileController{
 		}
 		else{
 			user.setPassword("");
-			user.setDreams(null);
+			//user.setDreams(null);
 			return user;
 		}
 		
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/mobuser", method = RequestMethod.POST)
 	public User MobileUser(@RequestBody User userinfo) {
 		//validate user
 		
@@ -55,8 +57,15 @@ public class MobileController{
 		}
 		else{
 			user.setPassword("");
-			user.setDreams(null);
+			//user.setDreams(null);
 			return user;
 		}
 	}
+	
+	
+	@RequestMapping(value = "/dreams", method = RequestMethod.GET)
+	public List<Dream> MobileFetchDreams(@RequestParam int userId){
+		return this.dreamService.fetchUserIdDreams(userId);
+	}
+	
 }

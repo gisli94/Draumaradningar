@@ -2,6 +2,7 @@ package DreamDiary.services;
 import DreamDiary.entities.*;
 import DreamDiary.controllers.*;
 
+import java.util.*;
 
 public class DreamService{
 
@@ -42,8 +43,14 @@ public class DreamService{
 		
 	}
 	
+	public List<Dream> fetchUserIdDreams(int userId){
+		return this.database.getDreams(userId);
+	}
+	
 	private boolean logDream(){
 		return database.addDream(this.dream);		
 	}
+	
+	
 	
 }
