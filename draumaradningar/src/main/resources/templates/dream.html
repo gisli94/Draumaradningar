@@ -50,7 +50,8 @@ a {
     <div class = "jumbotron">
       <h2>Skrá drauminn minn</h2>
         <form action="#" th:action="@{/dream}" th:object="${dream}" method="post">
-        	<p><input type="text" th:field="*{date}" placeholder="Dagsetning (MM/DD/YY)"/></p>
+        	<p><input type="text" th:field="*{name}" placeholder="Titill"/></p>
+			<p><input type="text" th:field="*{date}" placeholder="Dagsetning (MM/DD/YY)"/></p>
           <p><input type="text" th:field="*{content}" placeholder="Skrifaðu drauminn þinn hér"/></p>
             <p><input type="submit" value="Senda" class="btn-default btn-lg"/> <input type="reset" value="Hreinsa" class="btn-default btn-lg"/></p>
         </form>
