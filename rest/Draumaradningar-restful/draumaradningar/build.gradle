@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'gs-DreamDiary'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile("org.springframework.social:spring-social-facebook")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.hibernate:hibernate-validator")
+	compile("com.h2database:h2")
+	compile("org.apache.tomcat.embed:tomcat-embed-el")
+    testCompile("junit:junit")
+    compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+	compile group: 'org.springframework.security', name: 'spring-security-crypto', version: '4.2.0.RELEASE'
+
+}
