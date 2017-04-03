@@ -95,4 +95,18 @@ public class MobileController{
 		this.dreamService = new DreamService(dream);
 		return this.dreamService.linkUser(user);
 	}
+	
+	@RequestMapping(value = "/mobsignup", method = RequestMethod.GET)
+ 	public User MobileSignUp(@RequestParam String name, @RequestParam String pass){
+ 		User user = new User();
+ 		user.setName(name);
+ 		user.setPassword(pass);
+ 		System.out.println("User: " + user.toString());
+ 		if (userService.createUser(user)) {
+ 			user.setPassword(pass);
+ 			User u = userService.loginUser(user);
+ 			return u;
+ 		}
+ 		return new User();
+ 	}
 }
