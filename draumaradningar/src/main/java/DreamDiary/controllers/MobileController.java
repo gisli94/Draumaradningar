@@ -3,6 +3,7 @@ import DreamDiary.services.*;
 import DreamDiary.entities.*;
 
 import java.util.*;
+import java.time.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class MobileController{
 	
 	UserService userService = new UserService();
-	DreamService dreamService = new DreamService();
+	DreamService dreamService;
 	
 	//not sure if needed
 /*	@RequestMapping("/mobguestuser")
@@ -48,16 +49,13 @@ public class MobileController{
 		//validate user
 		
 		System.out.println("Got Called");
-		//return "got called";
 		User user = userService.loginUser(userinfo);
 		System.out.println(user);
 		if(user == null){
-			//errors.rejectValue("name", "","Wrong user name or password");
 			return null;
 		}
 		else{
 			user.setPassword("");
-			//user.setDreams(null);
 			return user;
 		}
 	}
@@ -65,7 +63,36 @@ public class MobileController{
 	
 	@RequestMapping(value = "/dreams", method = RequestMethod.GET)
 	public List<Dream> MobileFetchDreams(@RequestParam int userId){
+		dreamService = new DreamService();
 		return this.dreamService.fetchUserIdDreams(userId);
 	}
 	
+		
+	@RequestMapping(value = "/mobdream", method = RequestMethod.GET)
+	public Dream MobileReceiveDream(@RequestParam int userId, 
+											@RequestParam String title,
+											@RequestParam String content,
+											@RequestParam Date date){
+		Dream dream = new Dream();
+		dream.setName(title);
+		dream.setContent(content);
+		
+		dream.setDate(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+		User user = new User();
+		user.setId(userId);
+				
+		this.dreamService = new DreamService(dream);
+		return this.dreamService.linkUser(user);
+	}
+	
+	
+	@RequestMapping(value = "/mobdream", method = RequestMethod.POST)
+	public Dream MobileTakeDream(@RequestBody Dream dream) {
+		System.out.println("... Incoming dream ... ");
+		
+		User user = new User();
+		user.setId(dream.getUserId());
+		this.dreamService = new DreamService(dream);
+		return this.dreamService.linkUser(user);
+	}
 }
