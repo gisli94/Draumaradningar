@@ -4,6 +4,7 @@ import DreamDiary.entities.*;
 
 import java.util.*;
 import java.time.*;
+//import org.springframework.util.support.Base64;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -72,18 +73,22 @@ public class MobileController{
 	public Dream MobileReceiveDream(@RequestParam int userId, 
 											@RequestParam String title,
 											@RequestParam String content,
-											@RequestParam Date date){
+											@RequestParam String year,
+											@RequestParam String month,
+											@RequestParam String day											
+											){
 		Dream dream = new Dream();
 		dream.setName(title);
 		dream.setContent(content);
 		
-		dream.setDate(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+		dream.setDate(LocalDate.of(Integer.parseInt(year),Integer.parseInt(month), Integer.parseInt(day)));
 		User user = new User();
 		user.setId(userId);
 				
 		this.dreamService = new DreamService(dream);
 		return this.dreamService.linkUser(user);
 	}
+	
 	
 	
 	@RequestMapping(value = "/mobdream", method = RequestMethod.POST)
@@ -96,10 +101,12 @@ public class MobileController{
 		return this.dreamService.linkUser(user);
 	}
 	
+	
 	@RequestMapping(value = "/mobsignup", method = RequestMethod.GET)
  	public User MobileSignUp(@RequestParam String name, @RequestParam String pass){
  		User user = new User();
  		user.setName(name);
+		//user.setName(stringDecrypt(pass));
  		user.setPassword(pass);
  		System.out.println("User: " + user.toString());
  		if (userService.createUser(user)) {
@@ -109,4 +116,14 @@ public class MobileController{
  		}
  		return new User();
  	}
+	
+	
+/*	protected String stringDecrypt(String secret) {
+		byte[] valueDecoded= Base64.decode(secret.getBytes(), 0);
+		String pass = new String(valueDecoded);
+		pass = pass.substring(0,(pass.length() - 13));
+		String reverse = new StringBuilder(pass).reverse().toString();
+		byte[] valueDecoded2= Base64.decode(reverse.getBytes(), 0);
+		return new String(valueDecoded2);
+    }*/
 }
