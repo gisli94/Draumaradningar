@@ -72,7 +72,7 @@ public class DatabaseController{
             connection = DriverManager.getConnection("jdbc:postgresql://horton.elephantsql.com:5432/afkfpofr",
             "afkfpofr", "C2UETIervjxGCirloUj6XhQMC3T_z4XS");
             statement = connection.createStatement();
-            String sql = "SELECT * FROM DREAMS2 WHERE userid=" + user + " order by date desc limit 10";
+            String sql = "SELECT * FROM DREAMS2 WHERE userid=" + user + " order by date desc";
                 
             ResultSet rs = statement.executeQuery(sql);
                 
